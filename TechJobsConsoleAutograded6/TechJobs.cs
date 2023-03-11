@@ -12,7 +12,7 @@ namespace TechJobsConsoleAutograded6
             Dictionary<string, string> actionChoices = new Dictionary<string, string>();
             actionChoices.Add("search", "Search");
             actionChoices.Add("list", "List");
-
+            
             // Column options
             Dictionary<string, string> columnChoices = new Dictionary<string, string>();
             columnChoices.Add("core competency", "Skill");
@@ -135,7 +135,16 @@ namespace TechJobsConsoleAutograded6
         // TODO: complete the PrintJobs method.
         public void PrintJobs(List<Dictionary<string, string>> someJobs)
         {
-            Console.WriteLine("PrintJobs is not implemented yet");
+           
+            for (var i =0; i < someJobs.Count; i++)
+            {
+                Console.WriteLine(Environment.NewLine+ "*****");
+                foreach (KeyValuePair<string, string> jobs in someJobs[i])
+                {
+                    Console.WriteLine($"{jobs.Key}: {jobs.Value}");
+                }
+                Console.WriteLine("*****");
+            }
         }
     }
 }
