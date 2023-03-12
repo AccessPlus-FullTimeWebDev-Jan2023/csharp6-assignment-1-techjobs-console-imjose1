@@ -1,5 +1,9 @@
 ﻿using System;
+using System.Data;
+using System.Diagnostics.CodeAnalysis;
+using System.Reflection;
 using System.Text;
+using System.Threading.Tasks.Dataflow;
 
 namespace TechJobsConsoleAutograded6
 {
@@ -46,8 +50,27 @@ namespace TechJobsConsoleAutograded6
         {
             // load data, if not already loaded
             LoadData();
+            List<Dictionary<string, string>> jobs = new List<Dictionary<string, string>>();
+            for (var i = 0; i < AllJobs.Count; i++)
+            {
+                foreach (KeyValuePair<string, string> job in AllJobs[i])
+                {
+                    string aValue = job.Value;
+                    aValue = aValue.ToLower();
+                    value = value.ToLower();
+                    if (aValue.Contains(value))
+                    {
+                        jobs.Add(AllJobs[i]);
+                    }
+                }
+            }
+            
 
-            return null;
+            if (jobs.Count == 0)
+            {
+                Console.WriteLine("No results");
+            }
+            return jobs;
         }
 
         /**
@@ -61,22 +84,30 @@ namespace TechJobsConsoleAutograded6
         {
             // load data, if not already loaded
             LoadData();
-
+            
             List<Dictionary<string, string>> jobs = new List<Dictionary<string, string>>();
-
+            
             foreach (Dictionary<string, string> row in AllJobs)
             {
                 string aValue = row[column];
-
-
+             
                 //TODO: Make search case-insensitive
+                aValue = aValue.ToLower();
+                value = value.ToLower();
                 if (aValue.Contains(value))
                 {
                     jobs.Add(row);
                 }
             }
-
+           if (jobs.Count == 0) 
+            {
+                Console.WriteLine("No results");
+            }
             return jobs;
+            
+           
+            
+            
         }
 
         /*

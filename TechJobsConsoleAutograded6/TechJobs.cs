@@ -22,6 +22,7 @@ namespace TechJobsConsoleAutograded6
             columnChoices.Add("all", "All");
 
             Console.WriteLine("Welcome to LaunchCode's TechJobs App!");
+            
 
             // Allow user to search/list until they manually quit with ctrl+c
             while (true)
@@ -64,12 +65,17 @@ namespace TechJobsConsoleAutograded6
                     // Fetch results
                     if (columnChoice.Equals("all"))
                     {
-                        Console.WriteLine("Search all fields not yet implemented.");
+                        //Console.WriteLine("Search all fields not yet implemented.");
+                        List<Dictionary<string, string>> searchResults = JobData.FindByValue(searchTerm);
+                        PrintJobs(searchResults);
+
+
                     }
                     else
                     {
                         List<Dictionary<string, string>> searchResults = JobData.FindByColumnAndValue(columnChoice, searchTerm);
                         PrintJobs(searchResults);
+                        
                     }
                 }
 
@@ -141,9 +147,10 @@ namespace TechJobsConsoleAutograded6
                 Console.WriteLine(Environment.NewLine+ "*****");
                 foreach (KeyValuePair<string, string> jobs in someJobs[i])
                 {
-                    Console.WriteLine($"{jobs.Key}: {jobs.Value}");
+                   Console.WriteLine($"{jobs.Key}: {jobs.Value}");
                 }
                 Console.WriteLine("*****");
+               
             }
         }
     }
